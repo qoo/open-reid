@@ -29,8 +29,13 @@ class BaseTrainer(object):
 
             inputs, targets = self._parse_data(inputs)
             loss, prec1 = self._forward(inputs, targets)
-
-            losses.update(loss.data[0], targets.size(0))
+            
+            version =  torch.__version__
+            if int(version[2]) > 3: # for the new version like 0.4.0 and 0.5.0
+                losses.update(loss.item(), targets.size(0))
+            else:
+                losses.update(loss.data[0], targets.size(0))
+            
             precisions.update(prec1, targets.size(0))
 
             optimizer.zero_grad()
