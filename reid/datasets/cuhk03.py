@@ -9,8 +9,8 @@ from ..utils.serialization import write_json
 
 
 class CUHK03(Dataset):
-    url = 'https://docs.google.com/spreadsheet/viewform?usp=drive_web&formkey=dHRkMkFVSUFvbTJIRkRDLWRwZWpONnc6MA#gid=0'
-    md5 = '728939e58ad9f0ff53e521857dd8fb43'
+    url = 'https://www.dropbox.com/s/g63s3lix7x6p5ln/cuhk03_release.zip?dl=0'
+    md5 = 'b72c8a054a9fb5a3d1b6d13aeebac3cc'
 
     def __init__(self, root, split_id=0, num_val=100, download=True):
         super(CUHK03, self).__init__(root, split_id=split_id)
