@@ -5,6 +5,10 @@ purpose. It aims to provide a uniform interface for different datasets, a full
 set of models and evaluation metrics, as well as examples to reproduce (near)
 state-of-the-art results.
 
+# Note
+
+fix for Pytorch 1.0.0
+
 ## Installation
 
 Install [PyTorch](http://pytorch.org/) (version >= 0.2.0). Although we support
