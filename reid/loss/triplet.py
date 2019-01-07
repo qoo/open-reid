@@ -24,8 +24,13 @@ class TripletLoss(nn.Module):
         for i in range(n):
             dist_ap.append(dist[i][mask[i]].max())
             dist_an.append(dist[i][mask[i] == 0].min())
-        dist_ap = torch.stack(dist_ap)
-        dist_an = torch.stack(dist_an)
+        version =  torch.__version__
+        if int(version[2]) > 3 or int(version[0]) > 0: # for the new version like 0.4.0 and 0.5.0
+            dist_ap = torch.stack(dist_ap)
+            dist_an = torch.stack(dist_an)
+        else:
+            dist_ap = torch.cat(dist_ap)
+            dist_an = torch.cat(dist_an)
         # Compute ranking hinge loss
         y = dist_an.data.new()
         y.resize_as_(dist_an.data)
