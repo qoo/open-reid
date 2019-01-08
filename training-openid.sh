@@ -203,5 +203,32 @@ Traceback (most recent call last):
 RuntimeError: No valid query
 
 
+b0b4
+python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50
+
+/root/orb_sample_result_train_160/*/*.jpg
+Album dataset loaded
+  subset   | # ids | # images
+  ---------------------------
+  train    |  3211 |    11027
+  val      |   100 |      348
+  trainval |  3311 |    11375
+  query    |  3312 |    10734
+  gallery  |  3312 |    10734
+
+dismat
+[4.57763672e-05 1.92222595e+00 2.02798462e+00 1.84663391e+00
+ 6.23962402e-01 4.46914673e-01 4.58404541e-01 1.25223160e+02
+ 1.22278816e+02 1.26436195e+02 1.26436195e+02 1.25223160e+02
+ 8.12000732e+01 8.16957092e+01 8.06512299e+01]
+indices
+[  0   5   6   4   3   1   2 250 248 251 249  95  96  94 277]
+gallery_cams
+[0 1 2 3 4 5 6 0 1 2 3 4 0 1 2]
+
+  # 05ae
+
+python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50
+
 
 

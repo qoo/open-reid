@@ -66,6 +66,8 @@ class Album(Dataset):
         # exdir: training dataset path
         # exdir='/Users/chenghungyeh/repo/facenet_data/datasets/orb_sample_result_train_160'
         exdir='/root/orb_sample_result_train_160'
+        exdir='/root/orb_sample_result_train_all_160'
+
 
         input_dir=exdir
         input_filename = os.path.join(input_dir, '*')
