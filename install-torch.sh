@@ -62,6 +62,8 @@ pip install metric_learn
 #pip3 install metric_learn
 #pip3 install h5py
 
+git clone git@github.com:qoo/open-reid.git
+
 export PYTHONPATH=~/open-reid
 
 
