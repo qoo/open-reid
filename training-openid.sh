@@ -1,5 +1,8 @@
 export PYTHONPATH=~/open-reid
 
+
+
+
 pip install scikit-learn
 pip install metric_learn
 
@@ -202,11 +205,31 @@ Traceback (most recent call last):
     raise RuntimeError("No valid query")
 RuntimeError: No valid query
 
+# investigate evalutator.py
+Album dataset loaded
+  subset   | # ids | # images
+  ---------------------------
+  train    |  3211 |    11070
+  val      |   100 |      305
+  trainval |  3311 |    11375
+  query    |  3312 |    10734
+  gallery  |  3312 |    10734
 
-b0b4
+
+torch.Size([256, 128])
+Extract Features: [1/2] Time 3.477 (3.477)  Data 3.252 (3.252)  
+torch.Size([49, 128])
+Extract Features: [2/2] Time 2.856 (3.166)  Data 0.000 (1.626)  
+(305, 305)
+dismat
+
+
+# b0b4
+
 python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50
 
-/root/orb_sample_result_train_160/*/*.jpg
+ "/root/orb_sample_result_train_160/*/*.jpg"
+
 Album dataset loaded
   subset   | # ids | # images
   ---------------------------
@@ -226,9 +249,93 @@ indices
 gallery_cams
 [0 1 2 3 4 5 6 0 1 2 3 4 0 1 2]
 
+second Time
+torch.Size([256, 128])
+Extract Features: [1/2] Time 3.466 (3.466)  Data 3.190 (3.190)  
+torch.Size([49, 128])
+Extract Features: [2/2] Time 2.732 (3.099)  Data 0.000 (1.595)  
+" dismat.size()"
+
+
+(305, 305)
+query_ids
+[0 0 0 0 0 0 0 0 0 0 0 0 0 1 2]
+(305,)
+gallery_ids
+[0 0 0 0 0 0 0 0 0 0 0 0 0 1 2]
+dismat
+[0.0000000e+00 3.7288284e-01 5.8839798e-02 3.7288284e-01 3.9079285e-01
+ 3.7288284e-01 3.9079285e-01 1.2645721e-03 3.9079285e-01 5.8839798e-02
+ 0.0000000e+00 6.8117142e-02 6.5099716e-02 8.5010395e+00 1.6546637e+01]
+indices
+[  0  10   7   2   9  12  11   1   3   5   4   6   8 101 102]
+query_cams
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12  0  0]
+gallery_cams
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12  0  0]
+matches
+[[ True  True  True ... False False False]
+ [ True  True  True ... False False False]
+ [ True  True  True ... False False False]
+ ...
+ [ True  True  True ... False False False]
+ [ True False False ... False False False]
+ [ True  True  True ... False False False]]
+
+# epoch 2
+Epoch: [2][51/51] Time 0.751 (0.691)  Data 0.000 (0.063)  Loss 0.016 (0.015)  Prec 98.44% (99.07%)  
+torch.Size([256, 128])
+Extract Features: [1/2] Time 3.473 (3.473)  Data 3.283 (3.283)  
+torch.Size([49, 128])
+Extract Features: [2/2] Time 0.186 (1.829)  Data 0.000 (1.641)  
+dismat.size()
+(305, 305)
+matches
+[[ True  True  True ... False False False]
+ [ True  True  True ... False False False]
+ [ True  True  True ... False False False]
+ ...
+ [ True  True  True ... False False False]
+ [ True False False ... False False False]
+ [ True  True  True ... False False False]]
+query_ids
+[0 0 0 0 0 0 0 0 0 0 0 0 0 1 2]
+(305,)
+gallery_ids
+[0 0 0 0 0 0 0 0 0 0 0 0 0 1 2]
+dismat
+[-3.8146973e-06  2.5190830e+00  4.6430588e-02  2.5190830e+00
+  2.5479126e+00  2.5190830e+00  2.5479126e+00  1.6822815e-03
+  2.5479126e+00  4.6430588e-02 -3.8146973e-06  4.9339294e-02
+  4.2617798e-02  1.8656796e+01  1.8043898e+01]
+
+  indices
+[ 0 10  7 12  2  9 11  5  3  1  8  4  6 59 60]
+query_cams
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12  0  0]
+gallery_cams
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12  0  0]
+Mean AP: 100.0%
+
+python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50 --evaluate
   # 05ae
 
 python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50
+
+Album dataset loaded
+  subset   | # ids | # images
+  ---------------------------
+  train    | 47432 |   157456
+  val      |   100 |      369
+  trainval | 47532 |   157825
+  query    | 47532 |   158228
+  gallery  | 47532 |   158228
+
+
+
+# feb5
+python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50
+
 
 
 

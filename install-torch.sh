@@ -67,6 +67,7 @@ pip install Pillow
 git clone https://github.com/qoo/open-reid.git
 
 export PYTHONPATH=~/open-reid
+python -c "import torch; print(torch.__version__)"
 
 # download datasets
 # wget -O /root/open-reid/examples/data/cuhk03/raw/cuhk03_release.zip https://www.dropbox.com/s/ezlfz6xccpydkbu/cudnn-9.0-linux-x64-v7.3.0.29.tar?dl=0 https://www.dropbox.com/s/g63s3lix7x6p5ln/cuhk03_release.zip?dl=0

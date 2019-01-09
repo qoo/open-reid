@@ -5,7 +5,7 @@ purpose. It aims to provide a uniform interface for different datasets, a full
 set of models and evaluation metrics, as well as examples to reproduce (near)
 state-of-the-art results.
 
-# Note
+## Note
 
 fix for Pytorch 1.0.0
 
@@ -30,3 +30,8 @@ This is just a quick example. VIPeR dataset may not be large enough to train a d
 
 Check about more [examples](https://cysu.github.io/open-reid/examples/training_id.html)
 and [benchmarks](https://cysu.github.io/open-reid/examples/benchmarks.html).
+
+## Evaluation note
+
+distmat: open-reid/reid/evaluators.py
+distmat, mean_ap: open-reid/reid/evaluation_metrics/ranking.py

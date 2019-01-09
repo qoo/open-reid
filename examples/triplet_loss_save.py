@@ -116,9 +116,9 @@ def main(args):
     if args.evaluate:
         metric.train(model, train_loader)
         print("Validation:")
-        evaluator.evaluate(val_loader, dataset.val, dataset.val, metric)
+        evaluator.evaluate(val_loader, dataset.val, dataset.val, metric, True)
         print("Test:")
-        evaluator.evaluate(test_loader, dataset.query, dataset.gallery, metric)
+        evaluator.evaluate(test_loader, dataset.query, dataset.gallery, metric, False)
         return
 
     # Criterion

@@ -9,13 +9,13 @@ from ..utils.osutils import mkdir_if_missing
 from ..utils.serialization import write_json
 
 
-class Album(Dataset):
+class GoT(Dataset):
     url = 'http://users.soe.ucsc.edu/~manduchi/VIPeR.v1.0.zip'
     md5 = '1c2d9fc1cc800332567a0da25a1ce68c'
 
     def __init__(self, root, split_id=0, num_val=100, download=True):
         print('Running album.py')
-        super(Album, self).__init__(root, split_id=split_id)
+        super(GoT, self).__init__(root, split_id=split_id)
 
         if download:
             self.download()
@@ -56,17 +56,18 @@ class Album(Dataset):
         #     with ZipFile(fpath) as z:
         #         z.extractall(path=raw_dir)
 
-        # Format
-        images_dir = osp.join(self.root, 'images')
-        mkdir_if_missing(images_dir)
-        # cameras = [sorted(glob(osp.join(exdir, 'cam_a', '*.bmp'))),
-        #            sorted(glob(osp.join(exdir, 'cam_b', '*.bmp')))]
-        # assert len(cameras[0]) == len(cameras[1])
-        identities = []
         # exdir: training dataset path
         # exdir='/Users/chenghungyeh/repo/facenet_data/datasets/orb_sample_result_train_160'
         exdir='/root/orb_sample_result_train_160'
         exdir='/root/orb_sample_result_train_all_160'
+
+        # Format
+        images_dir = osp.join(self.root, 'images')
+        mkdir_if_missing(images_dir)
+        cameras = [sorted(glob(osp.join(exdir, '1', '*.bmp'))),
+                   sorted(glob(osp.join(exdir, '2', '*.bmp')))]
+        assert len(cameras[0]) == len(cameras[1])
+        identities = []
 
 
         input_dir=exdir

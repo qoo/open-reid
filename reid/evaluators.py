@@ -8,6 +8,7 @@ from .evaluation_metrics import cmc, mean_ap
 from .feature_extraction import extract_cnn_feature
 from .utils.meters import AverageMeter
 
+import os
 
 def extract_features(model, data_loader, print_freq=1, metric=None):
     model.eval()
@@ -114,7 +115,22 @@ class Evaluator(object):
         super(Evaluator, self).__init__()
         self.model = model
 
-    def evaluate(self, data_loader, query, gallery, metric=None):
+    def evaluate(self, data_loader, query, gallery, metric=None, save=False):
         features, _ = extract_features(self.model, data_loader)
         distmat = pairwise_distance(features, query, gallery, metric=metric)
+        if save:
+            self.save_2D(distmat, '~/save')
         return evaluate_all(distmat, query=query, gallery=gallery)
+
+    def save_2D(self, embedding_matrix, out_dir='~/'):
+        for idx, distance in enumerate(embedding_matrix):
+            self.save_1Darray(distance, os.path.expanduser(os.path.join(out_dir, str(idx))))
+
+    def save_1Darray(self, data, filename):
+        filename = os.path.expanduser(filename)
+        with open(filename, 'w') as f:
+            for data_idx, item in enumerate(data):
+                if data_idx + 1 != len(data):
+                    f.write("%s\n" % str(item))
+                else:
+                    f.write("%s" % str(item))
