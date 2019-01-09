@@ -318,6 +318,12 @@ gallery_cams
 Mean AP: 100.0%
 
 python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50 --evaluate
+ok
+
+python examples/triplet_loss_save.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50 --evaluate
+
+
+
   # 05ae
 
 python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50
