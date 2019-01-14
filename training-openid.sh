@@ -254,8 +254,7 @@ torch.Size([256, 128])
 Extract Features: [1/2] Time 3.466 (3.466)  Data 3.190 (3.190)  
 torch.Size([49, 128])
 Extract Features: [2/2] Time 2.732 (3.099)  Data 0.000 (1.595)  
-" dismat.size()"
-
+dismat.size
 
 (305, 305)
 query_ids
@@ -322,20 +321,135 @@ ok
 
 python examples/triplet_loss_save.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50 --evaluate
 
+# test GoT
+model 0.07 training
+python examples/triplet_loss_save.py --height 160 --width 160 -d got -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50 --evaluate
+dismat.size()
+(6632, 6632)
+matches
+[[ True  True False ... False False False]
+ [ True  True False ... False False False]
+ [ True  True False ... False False False]
+ ...
+ [False False False ... False False False]
+ [ True False False ... False False False]
+ [False False False ... False False False]]
+query_ids
+[0 0 1 1 2 2 3 3 4 4 5 5 6 6 7]
+(6632,)
+gallery_ids
+[0 0 1 1 2 2 3 3 4 4 5 5 6 6 7]
+dismat
+[-2.2351742e-08  1.3131142e-02  6.7038603e-02  5.7507932e-02
+  5.5428565e-02  5.2177519e-02  4.5879245e-02  4.4210222e-02
+  4.6505544e-02  4.6189599e-02  2.8052825e-02  2.8052825e-02
+  2.8052825e-02  1.3065676e-01  2.8052807e-02]
+indices
+[   0    1   48   14 6631  213   18 1062   16 1068 1070 6503 6499   11
+   10]
+query_cams
+[0 1 0 1 0 1 0 1 0 1 0 1 0 1 0]
+gallery_cams
+[0 1 0 1 0 1 0 1 0 1 0 1 0 1 0]
+Mean AP: 0.2%
+CMC Scores    allshots      cuhk03  market1501
+  top-1           0.1%        0.1%        0.1%
+  top-5           0.2%        0.3%        0.2%
+  top-10          0.2%        0.4%        0.2%
 
+
+model 0.9 training, GoT validation
+python examples/triplet_loss_save.py --height 160 --width 160 -d got -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50 --evaluate
+
+Min lens of two sets is 3316 photos
+GoT dataset loaded
+  subset   | # ids | # images
+  ---------------------------
+  train    |  3216 |     6432
+  val      |   100 |      200
+  trainval |  3316 |     6632
+  query    |  3316 |     6632
+  gallery  |  3316 |     6632
+
+query_ids
+[0 0 1 1 2 2 3 3 4 4 5 5 6 6 7]
+(6632,)
+gallery_ids
+[0 0 1 1 2 2 3 3 4 4 5 5 6 6 7]
+dismat
+[-2.2351742e-08  1.3131142e-02  6.7038603e-02  5.7507932e-02
+  5.5428565e-02  5.2177519e-02  4.5879245e-02  4.4210222e-02
+  4.6505544e-02  4.6189599e-02  2.8052825e-02  2.8052825e-02
+  2.8052825e-02  1.3065676e-01  2.8052807e-02]
+indices
+[   0    1   48   14  213 6631 6499 6501 6503   18 1070   16  201  868
+   12]
+query_cams
+[0 1 0 1 0 1 0 1 0 1 0 1 0 1 0]
+gallery_cams
+[0 1 0 1 0 1 0 1 0 1 0 1 0 1 0]
+
+
+model 0.9 training, Friends validation
+python examples/triplet_loss_save.py --height 160 --width 160 -d friends -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50 --evaluate
+
+query_ids
+[0 0 1 1 2 2 3 3 4 4 5 5 6 6 7]
+(2740,)
+gallery_ids
+[0 0 1 1 2 2 3 3 4 4 5 5 6 6 7]
+dismat
+[0.         0.         0.         0.         0.02479104 0.04286612
+ 0.06693226 0.07337748 0.05365986 0.06376052 0.0391482  0.09471095
+ 0.05541082 0.09618793 0.07009673]
+indices
+[2736    0 2594 2553 1381 1379 2738 1296  256  235 2739    2    3    1
+  258]
+query_cams
+[0 1 0 1 0 1 0 1 0 1 0 1 0 1 0]
+gallery_cams
+[0 1 0 1 0 1 0 1 0 1 0 1 0 1 0]
+
+
+model 0.9 training, 6000 album validation
+python examples/triplet_loss_save.py --height 160 --width 160 -d albumpair -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50 --evaluate
+
+/anaconda3/bin/python "/Users/chenghungyeh/Library/Mobile Documents/com~apple~CloudDocs/repo/facenet_davidsandberg/src/facenet_test.py"
+
+Accuracy: 0.98817+-0.00302
+Validation rate: 0.95700+-0.00948 @ FAR=0.00100
+Area Under Curve (AUC): 0.999
+Equal Error Rate (EER): 0.013
+
+square distance
+Accuracy: 0.65433+-0.01342
+Validation rate: 0.94033+-0.01703 @ FAR=0.00067
+Area Under Curve (AUC): 0.654
+Equal Error Rate (EER): 0.409
+
+
+# valdate the final model feb5
+python examples/triplet_loss_save.py --height 160 --width 160 -d albumpair -a resnet50 --combine-trainval --logs-dir ~/logs.feb5.best/triplet-loss/album-resnet50 --evaluate
+
+
+Accuracy: 0.98817+-0.00302
+Validation rate: 0.95700+-0.00948 @ FAR=0.00100
+Area Under Curve (AUC): 0.999
+Equal Error Rate (EER): 0.013
 
   # 05ae
 
 python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50
-
-Album dataset loaded
+Min lens of two sets is 6000 photos
+AlbumPair dataset loaded
   subset   | # ids | # images
   ---------------------------
-  train    | 47432 |   157456
-  val      |   100 |      369
-  trainval | 47532 |   157825
-  query    | 47532 |   158228
-  gallery  | 47532 |   158228
+  train    |  5900 |    11800
+  val      |   100 |      200
+  trainval |  6000 |    12000
+  query    |  6000 |    12000
+  gallery  |  6000 |    12000
+
 
 
 
@@ -343,5 +457,16 @@ Album dataset loaded
 python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50
 
 
+# compare friends
 
+## do 1 sec
+ffmpeg -i 1252812627.m4v -vf fps=1 1252812627/image-%06d.jpg
+ffmpeg -i 1252812923.m4v -vf fps=1 1252812923/image-%06d.jpg
 
+ffmpeg -i 1252812627.m4v -vf fps=1 1252812627/1252812627_%04d.jpg
+ffmpeg -i 1252812923.m4v -vf fps=1 1252812923/1252812923_%04d.jpg
+
+ffmpeg -i 169182094.m4v -vf fps=1 169182094/169182094_%04d.jpg
+ffmpeg -i 169182098.m4v -vf fps=1 169182098/169182098_%04d.jpg
+
+## convert to 160*160

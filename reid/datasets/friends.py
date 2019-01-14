@@ -9,12 +9,12 @@ from ..utils.osutils import mkdir_if_missing
 from ..utils.serialization import write_json
 
 
-class GoT(Dataset):
+class Friends(Dataset):
     url = 'http://users.soe.ucsc.edu/~manduchi/VIPeR.v1.0.zip'
     md5 = '1c2d9fc1cc800332567a0da25a1ce68c'
 
     def __init__(self, root, split_id=0, num_val=100, download=True):
-        super(GoT, self).__init__(root, split_id=split_id)
+        super(Friends, self).__init__(root, split_id=split_id)
 
         if download:
             self.download()
@@ -60,14 +60,14 @@ class GoT(Dataset):
         exdir='/root/orb_sample_result_train_160'
         exdir='/root/orb_sample_result_train_all_160'
         exdir = '/Users/chenghungyeh/GoT_frame_160'
-        exdir = '/root/GoT_frame_160'
+        exdir = '/root/Friends_160'
 
 
         # Format
         images_dir = osp.join(self.root, 'images')
         mkdir_if_missing(images_dir)
-        cameras = [sorted(glob(osp.join(exdir, '1252812627', '*.jpg'))),
-                   sorted(glob(osp.join(exdir, '1252812923', '*.jpg')))]
+        cameras = [sorted(glob(osp.join(exdir, '169182094', '*.jpg'))),
+                   sorted(glob(osp.join(exdir, '169182098', '*.jpg')))]
         # assert len(cameras[0]) == len(cameras[1])
         minLen = min(len(cameras[0]), len(cameras[1]))
         print( 'Min lens of two sets is {:04d} photos'.format(minLen))
@@ -86,7 +86,7 @@ class GoT(Dataset):
 
 
         # Save meta information into a json file
-        meta = {'name': 'GoT', 'shot': 'single', 'num_cameras': 2,
+        meta = {'name': 'Friends', 'shot': 'single', 'num_cameras': 2,
                 'identities': identities}
         write_json(meta, osp.join(self.root, 'meta.json'))
         # # Randomly create ten training and test split

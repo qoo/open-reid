@@ -8,6 +8,8 @@ from .market1501 import Market1501
 from .viper import VIPeR
 from .album import Album
 from .got import GoT
+from .albumpair import AlbumPair
+from .friends import Friends
 
 __factory = {
     'viper': VIPeR,
@@ -17,6 +19,8 @@ __factory = {
     'dukemtmc': DukeMTMC,
     'album': Album,
     'got': GoT,
+    'friends': Friends,
+    'albumpair': AlbumPair,
 }
 
 

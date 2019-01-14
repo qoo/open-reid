@@ -74,3 +74,13 @@ python -c "import torch; print(torch.__version__)"
 wget -O orb_sample_result_train_all_160.zip https://www.dropbox.com/s/64thsa9f885l8hm/orb_sample_result_train_all_160.zip?dl=0
 unzip orb_sample_result_train_all_160.zip
 
+wget -O ~/GoT_frame_160.zip https://www.dropbox.com/s/dn3fdhd4dbcxdx1/GoT_frame_160.zip?dl=0
+unzip ~/GoT_frame_160.zip
+
+wget -O ~/Friends_160.zip https://www.dropbox.com/s/54139faf9rzkaoo/Friends_160.zip?dl=0
+unzip ~/Friends_160.zip
+
+wget -O ~/orb_new_result_160.zip https://www.dropbox.com/s/aedau4tppg89e0o/orb_new_result_160.zip?dl=0
+unzip ~/orb_new_result_160.zip -d ~/
+
+

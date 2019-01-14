@@ -115,11 +115,14 @@ class Evaluator(object):
         super(Evaluator, self).__init__()
         self.model = model
 
-    def evaluate(self, data_loader, query, gallery, metric=None, save=False):
+    def evaluate(self, data_loader, query, gallery, metric=None, save=False, save_path='~/save'):
         features, _ = extract_features(self.model, data_loader)
         distmat = pairwise_distance(features, query, gallery, metric=metric)
         if save:
-            self.save_2D(distmat, '~/save')
+            self.save_2D(distmat, save_path)
+            print("Distance matrix has been saved to ~/save ")
+        if False:
+            ""
         return evaluate_all(distmat, query=query, gallery=gallery)
 
     def save_2D(self, embedding_matrix, out_dir='~/'):

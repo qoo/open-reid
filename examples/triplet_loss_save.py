@@ -115,10 +115,19 @@ def main(args):
     evaluator = Evaluator(model)
     if args.evaluate:
         metric.train(model, train_loader)
-        print("Validation:")
-        evaluator.evaluate(val_loader, dataset.val, dataset.val, metric, True)
-        print("Test:")
-        evaluator.evaluate(test_loader, dataset.query, dataset.gallery, metric, False)
+        # print("Validation:")
+        # evaluator.evaluate(val_loader, dataset.val, dataset.val, metric, True)
+        print('Test with best model:')
+        checkpoint = load_checkpoint(osp.join(args.logs_dir, 'model_best.pth.tar'))
+        model.module.load_state_dict(checkpoint['state_dict'])
+        metric.train(model, train_loader)
+        # evaluator.evaluate(test_loader, dataset.query, dataset.gallery, metric, True, args.save_dir)
+
+        if args.save:
+            evaluator.evaluate(test_loader, dataset.query, dataset.gallery, metric, True, args.save_dir)
+        else:
+            evaluator.evaluate(test_loader, dataset.query, dataset.gallery, metric, False, args.save_dir)
+
         return
 
     # Criterion
@@ -217,4 +226,9 @@ if __name__ == '__main__':
                         default=osp.join(working_dir, 'data'))
     parser.add_argument('--logs-dir', type=str, metavar='PATH',
                         default=osp.join(working_dir, 'logs'))
+    # eval
+    parser.add_argument('--save', action='store_true',
+                        help="when selecting evaluation, save distance matrix to ~/save")
+    parser.add_argument('--save_dir', type=str, metavar='PATH',
+                        default='~/save')
     main(parser.parse_args())

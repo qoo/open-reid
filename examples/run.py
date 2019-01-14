@@ -8,6 +8,6 @@ import sys
 
 from reid import datasets
 
-raw_dir='~/album'
+raw_dir='~/albumpair'
 raw_dir = osp.expanduser(raw_dir)
-dataset = datasets.create('album', raw_dir)
+dataset = datasets.create('albumpair', raw_dir)
