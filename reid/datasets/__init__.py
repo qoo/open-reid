@@ -7,6 +7,7 @@ from .dukemtmc import DukeMTMC
 from .market1501 import Market1501
 from .viper import VIPeR
 from .album import Album
+from .album100 import Album100
 from .got import GoT
 from .albumpair import AlbumPair
 from .friends import Friends
@@ -18,6 +19,7 @@ __factory = {
     'market1501': Market1501,
     'dukemtmc': DukeMTMC,
     'album': Album,
+    'album100': Album100,
     'got': GoT,
     'friends': Friends,
     'albumpair': AlbumPair,

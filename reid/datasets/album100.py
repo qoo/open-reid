@@ -9,13 +9,13 @@ from ..utils.osutils import mkdir_if_missing
 from ..utils.serialization import write_json
 
 
-class Album(Dataset):
+class Album100(Dataset):
     url = 'http://users.soe.ucsc.edu/~manduchi/VIPeR.v1.0.zip'
     md5 = '1c2d9fc1cc800332567a0da25a1ce68c'
 
     def __init__(self, root, split_id=0, num_val=100, download=True):
         print('Running album.py')
-        super(Album, self).__init__(root, split_id=split_id)
+        super(Album100, self).__init__(root, split_id=split_id)
 
         if download:
             self.download()

@@ -431,15 +431,6 @@ Equal Error Rate (EER): 0.409
 # valdate the final model feb5
 python examples/triplet_loss_save.py --height 160 --width 160 -d albumpair -a resnet50 --combine-trainval --logs-dir ~/logs.feb5.best/triplet-loss/album-resnet50 --evaluate
 
-
-Accuracy: 0.98817+-0.00302
-Validation rate: 0.95700+-0.00948 @ FAR=0.00100
-Area Under Curve (AUC): 0.999
-Equal Error Rate (EER): 0.013
-
-  # 05ae
-
-python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50
 Min lens of two sets is 6000 photos
 AlbumPair dataset loaded
   subset   | # ids | # images
@@ -450,6 +441,37 @@ AlbumPair dataset loaded
   query    |  6000 |    12000
   gallery  |  6000 |    12000
 
+Accuracy: 0.98817+-0.00302
+Validation rate: 0.95700+-0.00948 @ FAR=0.00100
+Area Under Curve (AUC): 0.999
+Equal Error Rate (EER): 0.013
+
+# feb5 best2. load best model 
+[  0.          11.41477203 181.03175354 180.69567871 258.5118103
+ 257.68695068  58.40104675  59.07329559 194.33120727 188.7746582
+  73.54932404  75.13252258  81.42066956  82.76686096  85.3118515 ]
+[ 11.41477203   0.         154.11499023 153.73260498 302.7376709
+ 301.81799316  55.37171936  55.51145172 218.10499573 210.87145996
+  89.55433655  93.02603912  71.52693176  73.77981567  99.4070282 ]
+Accuracy: 0.99383+-0.00269
+Validation rate: 0.98900+-0.00473 @ FAR=0.00100
+Area Under Curve (AUC): 0.604
+
+# feb5, best 2 model 0.9 training, GoT validation
+python examples/triplet_loss_save.py --height 160 --width 160 -d got -a resnet50 --combine-trainval --logs-dir ~/logs.feb5.best/triplet-loss/album-resnet50 --evaluate --save
+
+  # 05ae
+
+python examples/triplet_loss.py --height 160 --width 160 -d album -a resnet50 --combine-trainval --logs-dir examples/logs/triplet-loss/album-resnet50 
+
+Album dataset loaded
+  subset   | # ids | # images
+  ---------------------------
+  train    | 47432 |   157456
+  val      |   100 |      369
+  trainval | 47532 |   157825
+  query    | 47532 |   158228
+  gallery  | 47532 |   158228
 
 
 
@@ -470,3 +492,47 @@ ffmpeg -i 169182094.m4v -vf fps=1 169182094/169182094_%04d.jpg
 ffmpeg -i 169182098.m4v -vf fps=1 169182098/169182098_%04d.jpg
 
 ## convert to 160*160
+
+
+
+#### Evaluate all
+tpr, fpr, accuracy, val, val_std, far = evaluate(thresholds, distance_pair, actual_issame)
+print('Accuracy: %2.5f+-%2.5f' % (np.mean(accuracy), np.std(accuracy)))
+print('Validation rate: %2.5f+-%2.5f @ FAR=%2.5f' % (val, val_std, far))
+# fpr = np.append(fpr, [1])
+# tpr = np.append(tpr, [1])
+
+auc = metrics.auc(fpr, tpr)
+print('Area Under Curve (AUC): %1.3f' % auc)
+plot_auc(fpr,tpr)
+# eer = brentq(lambda x: 1. - x - interpolate.interp1d(fpr, tpr)(x), 0., 1.)
+# print('Equal Error Rate (EER): %1.3f' % eer)
+####
+
+
+def plot_auc(x, y,filename='~/save'):
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
+plt.figure()
+lw = 2
+fpr=x
+tpr=y
+auc = metrics.auc(fpr, tpr)
+plt.plot(fpr, tpr, color='darkorange',
+         lw=lw, label='ROC curve (area = %0.2f)' % auc)
+plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver operating characteristic example')
+plt.legend(loc="lower right")
+plt.savefig(filename)
+plt.show()
+
+
+    simcloud -c https://simcloud-mr2.apple.com job cancel
+
+
+
