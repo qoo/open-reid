@@ -535,4 +535,14 @@ plt.show()
     simcloud -c https://simcloud-mr2.apple.com job cancel
 
 
+# train all training set
+# feb5
+python examples/triplet_loss.py --height 160 --width 160 -d album100 -a resnet50 --combine-trainval --logs-dir examples/logs.feb5.train100/triplet-loss/album-resnet50
+  subset   | # ids | # images
+  ---------------------------
+  train    | 94964 |   315686
+  val      |   100 |      367
+  trainval | 95064 |   316053
+  query    |  9506 |    31632
+  gallery  |  9506 |    31632
 

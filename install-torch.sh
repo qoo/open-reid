@@ -7,7 +7,7 @@ sudo apt-get -y autoremove
 
 # install utilities 
 sudo apt-get install tmux -y
-sudo apt-get install htop -y
+#sudo apt-get install htop -y
 
 # 2. INSTALL THE DEPENDENCIES
 
@@ -64,7 +64,7 @@ pip install Pillow
 #pip3 install h5py
 
 #git clone git@github.com:qoo/open-reid.git
-git clone https://github.com/qoo/open-reid.git
+#git clone https://github.com/qoo/open-reid.git
 
 export PYTHONPATH=~/open-reid
 python -c "import torch; print(torch.__version__)"
@@ -82,5 +82,18 @@ unzip ~/Friends_160.zip
 
 wget -O ~/orb_new_result_160.zip https://www.dropbox.com/s/aedau4tppg89e0o/orb_new_result_160.zip?dl=0
 unzip ~/orb_new_result_160.zip -d ~/
+ 
+orb_new_result_160
+only change the name of the 6000 pairs, album/album_image.jpg
 
+orb_new_result
+only change the name of the 6000 pairs, album/album_image.jpg
 
+orb_sample_result_train_all_160
+selected image for the training, album/image.jpg
+
+orb_validate
+selected image for the validation, album/image.jpg
+
+orb_sample_result
+copy all orb data in the folder, album/image.jpg

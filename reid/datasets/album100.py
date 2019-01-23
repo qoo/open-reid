@@ -110,7 +110,7 @@ class Album100(Dataset):
             for image_id, image in enumerate(cluster_dict[person]):
                 camera = []
                 fname = '{:08d}_{:02d}_{:04d}.jpg'.format(pid, image_id, 0)
-                # imsave(osp.join(images_dir, fname), imread(osp.join(exdir, person, image+ '.jpg')))
+                imsave(osp.join(images_dir, fname), imread(osp.join(exdir, person, image+ '.jpg')))
                 camera.append(fname)
                 identity.append(camera)
             identities.append(identity)
