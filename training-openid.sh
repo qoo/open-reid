@@ -546,3 +546,15 @@ python examples/triplet_loss.py --height 160 --width 160 -d album100 -a resnet50
   query    |  9506 |    31632
   gallery  |  9506 |    31632
 
+# model 1.0 training, 6000 album validation
+check open-reid/reid/datasets/albumpair.py
+cp ~/facenet_davidsandberg/data/pairs4.txt ~/
+
+
+python examples/triplet_loss_save.py --height 160 --width 160 -d albumpair -a resnet50 --combine-trainval --logs-dir ~/logs.feb5.train100/triplet-loss/album-resnet50 --evaluate
+
+/anaconda3/bin/python "/Users/chenghungyeh/Library/Mobile Documents/com~apple~CloudDocs/repo/facenet_davidsandberg/src/facenet_test.py"
+
+
+
+

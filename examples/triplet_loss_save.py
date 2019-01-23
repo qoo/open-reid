@@ -172,6 +172,7 @@ def main(args):
     model.module.load_state_dict(checkpoint['state_dict'])
     metric.train(model, train_loader)
     evaluator.evaluate(test_loader, dataset.query, dataset.gallery, metric)
+    print('Done.')
 
 
 if __name__ == '__main__':
